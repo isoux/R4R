@@ -1,3 +1,5 @@
+![R4R Logo](assets/logo.png)
+
 # 🛡️ R4R — Rusted 4 Rings Operating System
 
 **R4R** is a hobby operating system project built from scratch with the goal of fully demonstrating the functionality and interplay of all four Intel x86 privilege levels — Ring 0 to Ring 3 — starting from the i386 architecture.
