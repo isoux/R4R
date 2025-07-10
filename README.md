@@ -1,4 +1,4 @@
-![R4R Logo](assets/logo.png)
+![R4R Logo](assets/logo.jpg)
 
 # 🛡️ R4R — Rusted 4 Rings Operating System
 
