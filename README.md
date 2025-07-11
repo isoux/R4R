@@ -1,17 +1,14 @@
 ![R4R Logo](assets/logo.jpg)
 
-# 🛡️ R4R — Rusted 4 Rings Operating System
+# 🛡️ R4R — Rusted 4 Rings
+
+> A hobby operating system experiment for educational and artistic purposes.
 
 **R4R** is a hobby operating system project built from scratch with the goal of fully demonstrating the functionality and interplay of all four Intel x86 privilege levels — Ring 0 to Ring 3 — starting from the i386 architecture.
 
 This is a personal and educational endeavor to explore legacy hardware features that are often overlooked or abstracted away in modern operating systems.
 
----
-
-## ❗ Note on Platform and Boot Medium
-
-The initial version of R4R is designed to support **Intel i486 (or newer) processors** and will be **bootable from a 1.44MB floppy disk**.  
-This allows it to run on real retro hardware as well as in emulators like QEMU or Bochs, preserving the spirit of old-school computing.
+> ⚠️ **Note:** This is a hobbyist and educational project. It is not intended for production use. Expectations should be modest as development is done slowly, with care and curiosity.
 
 ---
 
@@ -26,6 +23,18 @@ Surprisingly, no public code example or documentation clearly showcases how **Ri
 > *“Would it be possible to create a working OS kernel that utilizes **all four rings**, not for fun only, but to explore what functionality, structure, and security features Intel had envisioned?”*
 
 This project aims to answer that question — even if only partially — and in doing so, encourages others to look back at the hardware roots of operating system design.
+
+## Project Description
+
+**R4R** is an *experimental hobbyist operating system* designed to showcase and demystify the functionality and interaction of all four Intel x86 protection rings (Ring 0–3), starting with the i386 architecture. It is not intended as a full-fledged operating system, but rather a platform for learning, demonstration, and artistic expression.
+
+It stems from a curiosity to explore underutilized or forgotten hardware features. While most modern systems operate using only Ring 0 (kernel) and Ring 3 (user), **R4R** attempts to bring all four rings into play in a coordinated and observable way.
+
+## Hardware Requirements
+
+- Minimal support will begin with the **Intel 486 (i486)** processor.
+- Will be **bootable from a floppy disk** for maximum compatibility with vintage PCs.
+- Designed to run on real hardware (i386/i486) as well as emulators like **QEMU**, **Bochs**, or **VirtualBox**.
 
 ---
 
@@ -116,4 +125,3 @@ Use it freely for learning, hacking, or contributing to low-level OS development
 > Coming soon: project website, YouTube series, ISO builds, and technical blog posts.
 
 Stay tuned!
-
