@@ -1,127 +1,117 @@
-![R4R Logo](assets/logo.jpg)
+![R4R Лого](assets/logo.jpg)
 
-# 🛡️ R4R — Rusted 4 Rings
+# 🛡️ R4R — Зарђала Четири Ринга (Rusted 4 Rings)
 
-> A hobby operating system experiment for educational and artistic purposes.
+**R4R** је хоби оперативни систем писан од нуле, са циљем да демонстрира функционалност и сарадњу сва четири нивоа привилегија Intel x86 архитектуре — од Ринга 0 до Ринга 3 — почев од i386 процесора.
 
-**R4R** is a hobby operating system project built from scratch with the goal of fully demonstrating the functionality and interplay of all four Intel x86 privilege levels — Ring 0 to Ring 3 — starting from the i386 architecture.
-
-This is a personal and educational endeavor to explore legacy hardware features that are often overlooked or abstracted away in modern operating systems.
-
-> ⚠️ **Note:** This is a hobbyist and educational project. It is not intended for production use. Expectations should be modest as development is done slowly, with care and curiosity.
+Ово је лично и образовно истраживање заборављених могућности хардвера које модерни оперативни системи углавном апстрахују или игноришу.
 
 ---
 
-## ✨ About This Project
+## ❗ Напомена о платформи и начину покретања
 
-> *"For a self-taught person like me, who is still learning to code, realizing an idea by writing from scratch is not an easy process at all. There is also a fear of failure and ridicule from genius people and professionals. But sincere desire and joy when you master the basic functionality of hardware — even just a little — overcomes all obstacles. It is an even greater inspiration that this little work will mean at least something to someone."*
-
-This project was born from the curiosity and joy of exploring the **Intel x86 privilege ring model**, and particularly the lack of accessible examples demonstrating how all **four protection rings** interact in a real operating system environment.
-
-Surprisingly, no public code example or documentation clearly showcases how **Ring 0 to Ring 3** can cooperate within a functioning kernel — especially in the context of a minimalist, bare-metal OS.
-
-> *“Would it be possible to create a working OS kernel that utilizes **all four rings**, not for fun only, but to explore what functionality, structure, and security features Intel had envisioned?”*
-
-This project aims to answer that question — even if only partially — and in doing so, encourages others to look back at the hardware roots of operating system design.
-
-## Project Description
-
-**R4R** is an *experimental hobbyist operating system* designed to showcase and demystify the functionality and interaction of all four Intel x86 protection rings (Ring 0–3), starting with the i386 architecture. It is not intended as a full-fledged operating system, but rather a platform for learning, demonstration, and artistic expression.
-
-It stems from a curiosity to explore underutilized or forgotten hardware features. While most modern systems operate using only Ring 0 (kernel) and Ring 3 (user), **R4R** attempts to bring all four rings into play in a coordinated and observable way.
-
-## Hardware Requirements
-
-- Minimal support will begin with the **Intel 486 (i486)** processor.
-- Will be **bootable from a floppy disk** for maximum compatibility with vintage PCs.
-- Designed to run on real hardware (i386/i486) as well as emulators like **QEMU**, **Bochs**, or **VirtualBox**.
+Почетна верзија R4R пројекта је намењена **Intel i486 (или новијим)** процесорима и биће **бутабилна са 1.44MB флопи диска**.  
+Ово омогућава покретање на стварном старом хардверу, као и у емулацијама као што су QEMU или Bochs, што подржава дух ретро програмирања.
 
 ---
 
-## 📛 About the Project Name: R4R
+## ✨ О Пројекту
 
-The name **R4R** holds a layered meaning, carefully chosen to reflect both the spirit and the technical ambition of the project.
+> *„За самоуког програмера попут мене, који још увек учи програмирање, остварити идеју писањем од нуле није нимало лако. Постоји и страх од неуспеха и подсмеха од стручњака. Али искрена радост када овладаш и малим делом хардвера — надјача све препреке. Још је већа мотивација ако овај мали рад значи бар нешто неком другом.”*
 
-### 🧷 Primary Meaning: *Rusted 4 Rings*
+Овај пројекат је настао из радозналости и жеље да се боље разуме **модел привилегија (прстенова)** код Intel x86 процесора, посебно јер нема много доступних примера који показују **сарадњу сва четири ринга у оквиру једног оперативног система**.
 
-- Refers to the four classic protection rings (Ring 0 through Ring 3) of the Intel x86 architecture — “rusted” as a metaphor for forgotten but still powerful features.
-- The project is an homage to these rings, demonstrating their functionality and interaction on Intel processors, starting from the i386.
-- Emphasizes a **hardware-oriented**, **non-portable** OS design — one that embraces the features often hidden in portable systems.
-- “Rusted” evokes nostalgia for deep hardware-level programming — a level often lost in modern abstraction.
+Изненађујуће је што нигде није јасно приказан пример ОС-а који демонстрира транзиције и сарадњу између Ринга 0 до Ринга 3.
 
-### 🌀 Other Interpretations
+> *„Да ли је могуће направити ОС кернел који заиста користи сва четири ринга, не само ради забаве, већ и ради разумевања шта је Intel тим дизајном хтео да омогући?”*
 
-- **Rings for Rust** — Reflects future plans to implement parts of the OS in [Rust](https://www.rust-lang.org/), especially where LLVM’s 32-bit support has presented challenges.
-- **Real 4 Rings** — Emphasizes the rare goal of fully implementing and demonstrating the interaction of all four x86 rings.
-- **Retro for Research** — Highlights the project's educational and artistic goals. This is a hobby OS — but with deep respect for retro computing and its research potential.
+Овај пројекат је покушај да се на то питање одговори, макар делимично, и да се другима покаже лепота хардверских основа на којима је све почело.
 
 ---
 
-## 🔭 Technical Focus
+## 📛 О Називу Пројекта: R4R
 
-- Written in **C** (using **GCC**) with extensive use of **inline assembly**
-- Based on the **Multiboot v1** boot specification
-- Targeting **i386 (32-bit x86)** architecture
-- Emulates or runs on real machines with **ring isolation** supported
-- Uses a **custom GDT and TSS** to demonstrate privilege separation
-- Demonstrates **Call Gates**, **Task Gates**, and transitions between all four rings
+Назив **R4R** има више значења, пажљиво одабраних да одражавају дух и циљ пројекта.
 
----
+### 🧷 Прво значење: *Rusted 4 Rings (Зарђала четири прстена)*
 
-## 🏗️ Future Plans
+- Односи се на 4 класична прстена заштите у x86 архитектури — „зарђала“ као симбол заборава и времена.
+- Пројекат је омаж тим прстеновима, приказујући њихову улогу и сарадњу на Intel процесорима од i386 па надаље.
+- Ослања се на **непреносиву**, **хардверски оријентисану** архитектуру ОС-а — насупрот модерним системима који абстрахују ове могућности.
+- „Rusted“ такође изражава носталгију према програмирању блиском хардверу.
 
-- Progressive integration of **Rust** in kernel components
-- Real-mode or protected-mode bootstrapping with **full ring transition paths**
-- Detailed documentation on GDT, LDT, TSS, and descriptor generation
-- Releasing ISO and emulator-ready builds for easy testing
-- Educational write-ups and videos to accompany the codebase
+### 🌀 Друга могућа тумачења
+
+- **Rings for Rust** — указује на будуће планове да се неки делови препишу у [Rust](https://www.rust-lang.org/), посебно због безбедности и LLVM проблема са i386.
+- **Real 4 Rings** — наглашава ретку и амбициозну намеру да се сва четири ринга заиста употребе у ОС-у.
+- **Retro for Research** — истиче образовни и експериментални карактер пројекта.
 
 ---
 
-## 💡 Inspiration
+## 🔭 Технички Фокус
 
-The project is deeply inspired by early UNIX systems that ran on Intel 386 processors, and in particular the work of:
-
-- **William and Lynne Jolitz** — creators of **386BSD**, one of the first open-source ports of UNIX to the i386 platform
-- The simplicity, power, and elegance of **early x86 system architecture**
-- The desire to educate and inspire others to **explore hardware-level programming** for its own sake
-
----
-
-## 🧠 Why This Still Matters
-
-> *“In the age of abstracted software layers, managed runtimes, and portable VMs, one could ask — why bother with legacy features like 4 protection rings?”*
-
-The answer is simple: **curiosity, art, education, and homage**.
-
-We’re not here to reinvent the wheel — we’re here to examine the spokes and admire the mechanics.
+- Писано у **C** језику (са **GCC**) и интензивним коришћењем **inline асемблера**
+- Базиран на **Multiboot v1** спецификацији
+- Циљна архитектура: **i386 (32-битни x86)**
+- Ради на реалном хардверу и у емулацији уз подршку за **изолацију рингова**
+- Користи **прилагођену GDT и TSS** за приказ одвајања привилегија
+- Демонстрира **Call Gates**, **Task Gates** и транзиције између свих рингова
 
 ---
 
-## 🤝 Get Involved
+## 🏗️ Планови за Будућност
 
-If you're interested in:
-
-- Writing real-mode/protected-mode C and ASM
-- Exploring ring transitions, descriptors, or segmentation
-- Learning or contributing Rust in a retrocomputing context
-- Collaborating on educational or documentation efforts
-
-Then feel free to **follow the project**, **star the repo**, or **submit a pull request**.
-
-All constructive feedback, critiques, and collaboration are warmly welcome!
+- Постепена интеграција **Rust-а** у кључне делове кернела
+- Покретање из реалног и заштићеног режима са **прелазима кроз све рингове**
+- Документација GDT, LDT, TSS и система дескриптора
+- Објављивање ISO-ова и туторијала за емулаторе
+- Образовни чланци и видео садржаји
 
 ---
 
-## 📜 License
+## 💡 Инспирација
 
-This project is open-source and released under the **MIT License**.  
-Use it freely for learning, hacking, or contributing to low-level OS development.
+Пројекат је инспирисан раним UNIX системима који су радили на Intel 386 процесорима, посебно радом:
+
+- **William и Lynne Jolitz** — креатори **386BSD** система, једног од првих отворених UNIX портова за i386
+- Елеганцијом и једноставношћу **ране x86 архитектуре**
+- Жељом да се другима приближи лепота програмирања на нивоу блиском хардверу
 
 ---
 
-## 🔗 Links
+## 🧠 Зашто ово и даље има смисла
 
-> Coming soon: project website, YouTube series, ISO builds, and technical blog posts.
+> *„У доба апстрактних слојева софтвера и виртуализације, зашто се бавити старим механизмима као што је 4-ринг заштита?”*
 
-Stay tuned!
+Одговор је једноставан: **радозналост, уметност, учење и поштовање према историји**.
+
+Циљ није да се поново измишља точак, већ да се открију његови жбице и дивимо се механизму.
+
+---
+
+## 🤝 Сарадња
+
+Ако желиш да учиш, тестиаш, допринесеш или једноставно пратиш пројекат:
+
+- Пиши реални или заштићени режим у C/ASM
+- Истражуј сегментацију и прелазе између рингова
+- Радиш у Rust-у у контексту ретро хардвера
+- Желиш да напишеш документацију или примере
+
+Бићеш радо виђен као сарадник, критичар или инспиратор!
+
+---
+
+## 📜 Лиценца
+
+Пројекат је отвореног кода и издат под **MIT лиценцом**.  
+Слободно га користи за учење, хаковање или изградњу властитих ОС идеја.
+
+---
+
+## 🔗 Везе
+
+> Ускоро: званични сајт, YouTube туторијали, ISO фајлови и блог.
+
+Остани у току!
+
