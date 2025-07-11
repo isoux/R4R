@@ -1,117 +1,119 @@
-![R4R Лого](assets/logo.jpg)
+![R4R Logo](assets/logo.jpg)
 
-# 🛡️ R4R — Зарђала Четири Ринга (Rusted 4 Rings)
+# 🛡️ R4R — Rusted 4 Rings Operating System
 
-**R4R** је хоби оперативни систем писан од нуле, са циљем да демонстрира функционалност и сарадњу сва четири нивоа привилегија Intel x86 архитектуре — од Ринга 0 до Ринга 3 — почев од i386 процесора.
+**R4R** is a hobby operating system project built from scratch with the goal of fully demonstrating the functionality and interplay of all four Intel x86 privilege levels — Ring 0 to Ring 3 — starting from the i386 architecture.
 
-Ово је лично и образовно истраживање заборављених могућности хардвера које модерни оперативни системи углавном апстрахују или игноришу.
-
----
-
-## ❗ Напомена о платформи и начину покретања
-
-Почетна верзија R4R пројекта је намењена **Intel i486 (или новијим)** процесорима и биће **бутабилна са 1.44MB флопи диска**.  
-Ово омогућава покретање на стварном старом хардверу, као и у емулацијама као што су QEMU или Bochs, што подржава дух ретро програмирања.
+This is a personal and educational endeavor to explore legacy hardware features that are often overlooked or abstracted away in modern operating systems.
 
 ---
 
-## ✨ О Пројекту
+## ❗ Note on Platform and Boot Medium
 
-> *„За самоуког програмера попут мене, који још увек учи програмирање, остварити идеју писањем од нуле није нимало лако. Постоји и страх од неуспеха и подсмеха од стручњака. Али искрена радост када овладаш и малим делом хардвера — надјача све препреке. Још је већа мотивација ако овај мали рад значи бар нешто неком другом.”*
-
-Овај пројекат је настао из радозналости и жеље да се боље разуме **модел привилегија (прстенова)** код Intel x86 процесора, посебно јер нема много доступних примера који показују **сарадњу сва четири ринга у оквиру једног оперативног система**.
-
-Изненађујуће је што нигде није јасно приказан пример ОС-а који демонстрира транзиције и сарадњу између Ринга 0 до Ринга 3.
-
-> *„Да ли је могуће направити ОС кернел који заиста користи сва четири ринга, не само ради забаве, већ и ради разумевања шта је Intel тим дизајном хтео да омогући?”*
-
-Овај пројекат је покушај да се на то питање одговори, макар делимично, и да се другима покаже лепота хардверских основа на којима је све почело.
+The initial version of R4R is designed to support **Intel i486 (or newer) processors** and will be **bootable from a 1.44MB floppy disk**.  
+This allows it to run on real retro hardware as well as in emulators like QEMU or Bochs, preserving the spirit of old-school computing.
 
 ---
 
-## 📛 О Називу Пројекта: R4R
+## ✨ About This Project
 
-Назив **R4R** има више значења, пажљиво одабраних да одражавају дух и циљ пројекта.
+> *"For a self-taught person like me, who is still learning to code, realizing an idea by writing from scratch is not an easy process at all. There is also a fear of failure and ridicule from genius people and professionals. But sincere desire and joy when you master the basic functionality of hardware — even just a little — overcomes all obstacles. It is an even greater inspiration that this little work will mean at least something to someone."*
 
-### 🧷 Прво значење: *Rusted 4 Rings (Зарђала четири прстена)*
+This project was born from the curiosity and joy of exploring the **Intel x86 privilege ring model**, and particularly the lack of accessible examples demonstrating how all **four protection rings** interact in a real operating system environment.
 
-- Односи се на 4 класична прстена заштите у x86 архитектури — „зарђала“ као симбол заборава и времена.
-- Пројекат је омаж тим прстеновима, приказујући њихову улогу и сарадњу на Intel процесорима од i386 па надаље.
-- Ослања се на **непреносиву**, **хардверски оријентисану** архитектуру ОС-а — насупрот модерним системима који абстрахују ове могућности.
-- „Rusted“ такође изражава носталгију према програмирању блиском хардверу.
+Surprisingly, no public code example or documentation clearly showcases how **Ring 0 to Ring 3** can cooperate within a functioning kernel — especially in the context of a minimalist, bare-metal OS.
 
-### 🌀 Друга могућа тумачења
+> *“Would it be possible to create a working OS kernel that utilizes **all four rings**, not for fun only, but to explore what functionality, structure, and security features Intel had envisioned?”*
 
-- **Rings for Rust** — указује на будуће планове да се неки делови препишу у [Rust](https://www.rust-lang.org/), посебно због безбедности и LLVM проблема са i386.
-- **Real 4 Rings** — наглашава ретку и амбициозну намеру да се сва четири ринга заиста употребе у ОС-у.
-- **Retro for Research** — истиче образовни и експериментални карактер пројекта.
+This project aims to answer that question — even if only partially — and in doing so, encourages others to look back at the hardware roots of operating system design.
 
 ---
 
-## 🔭 Технички Фокус
+## 📛 About the Project Name: R4R
 
-- Писано у **C** језику (са **GCC**) и интензивним коришћењем **inline асемблера**
-- Базиран на **Multiboot v1** спецификацији
-- Циљна архитектура: **i386 (32-битни x86)**
-- Ради на реалном хардверу и у емулацији уз подршку за **изолацију рингова**
-- Користи **прилагођену GDT и TSS** за приказ одвајања привилегија
-- Демонстрира **Call Gates**, **Task Gates** и транзиције између свих рингова
+The name **R4R** holds a layered meaning, carefully chosen to reflect both the spirit and the technical ambition of the project.
 
----
+### 🧷 Primary Meaning: *Rusted 4 Rings*
 
-## 🏗️ Планови за Будућност
+- Refers to the four classic protection rings (Ring 0 through Ring 3) of the Intel x86 architecture — “rusted” as a metaphor for forgotten but still powerful features.
+- The project is an homage to these rings, demonstrating their functionality and interaction on Intel processors, starting from the i386.
+- Emphasizes a **hardware-oriented**, **non-portable** OS design — one that embraces the features often hidden in portable systems.
+- “Rusted” evokes nostalgia for deep hardware-level programming — a level often lost in modern abstraction.
 
-- Постепена интеграција **Rust-а** у кључне делове кернела
-- Покретање из реалног и заштићеног режима са **прелазима кроз све рингове**
-- Документација GDT, LDT, TSS и система дескриптора
-- Објављивање ISO-ова и туторијала за емулаторе
-- Образовни чланци и видео садржаји
+### 🌀 Other Interpretations
+
+- **Rings for Rust** — Reflects future plans to implement parts of the OS in [Rust](https://www.rust-lang.org/), especially where LLVM’s 32-bit support has presented challenges.
+- **Real 4 Rings** — Emphasizes the rare goal of fully implementing and demonstrating the interaction of all four x86 rings.
+- **Retro for Research** — Highlights the project's educational and artistic goals. This is a hobby OS — but with deep respect for retro computing and its research potential.
 
 ---
 
-## 💡 Инспирација
+## 🔭 Technical Focus
 
-Пројекат је инспирисан раним UNIX системима који су радили на Intel 386 процесорима, посебно радом:
-
-- **William и Lynne Jolitz** — креатори **386BSD** система, једног од првих отворених UNIX портова за i386
-- Елеганцијом и једноставношћу **ране x86 архитектуре**
-- Жељом да се другима приближи лепота програмирања на нивоу блиском хардверу
-
----
-
-## 🧠 Зашто ово и даље има смисла
-
-> *„У доба апстрактних слојева софтвера и виртуализације, зашто се бавити старим механизмима као што је 4-ринг заштита?”*
-
-Одговор је једноставан: **радозналост, уметност, учење и поштовање према историји**.
-
-Циљ није да се поново измишља точак, већ да се открију његови жбице и дивимо се механизму.
+- Written in **C** (using **GCC**) with extensive use of **inline assembly**
+- Based on the **Multiboot v1** boot specification
+- Targeting **i386 (32-bit x86)** architecture
+- Emulates or runs on real machines with **ring isolation** supported
+- Uses a **custom GDT and TSS** to demonstrate privilege separation
+- Demonstrates **Call Gates**, **Task Gates**, and transitions between all four rings
 
 ---
 
-## 🤝 Сарадња
+## 🏗️ Future Plans
 
-Ако желиш да учиш, тестиаш, допринесеш или једноставно пратиш пројекат:
-
-- Пиши реални или заштићени режим у C/ASM
-- Истражуј сегментацију и прелазе између рингова
-- Радиш у Rust-у у контексту ретро хардвера
-- Желиш да напишеш документацију или примере
-
-Бићеш радо виђен као сарадник, критичар или инспиратор!
+- Progressive integration of **Rust** in kernel components
+- Real-mode or protected-mode bootstrapping with **full ring transition paths**
+- Detailed documentation on GDT, LDT, TSS, and descriptor generation
+- Releasing ISO and emulator-ready builds for easy testing
+- Educational write-ups and videos to accompany the codebase
 
 ---
 
-## 📜 Лиценца
+## 💡 Inspiration
 
-Пројекат је отвореног кода и издат под **MIT лиценцом**.  
-Слободно га користи за учење, хаковање или изградњу властитих ОС идеја.
+The project is deeply inspired by early UNIX systems that ran on Intel 386 processors, and in particular the work of:
+
+- **William and Lynne Jolitz** — creators of **386BSD**, one of the first open-source ports of UNIX to the i386 platform
+- The simplicity, power, and elegance of **early x86 system architecture**
+- The desire to educate and inspire others to **explore hardware-level programming** for its own sake
 
 ---
 
-## 🔗 Везе
+## 🧠 Why This Still Matters
 
-> Ускоро: званични сајт, YouTube туторијали, ISO фајлови и блог.
+> *“In the age of abstracted software layers, managed runtimes, and portable VMs, one could ask — why bother with legacy features like 4 protection rings?”*
 
-Остани у току!
+The answer is simple: **curiosity, art, education, and homage**.
+
+We’re not here to reinvent the wheel — we’re here to examine the spokes and admire the mechanics.
+
+---
+
+## 🤝 Get Involved
+
+If you're interested in:
+
+- Writing real-mode/protected-mode C and ASM
+- Exploring ring transitions, descriptors, or segmentation
+- Learning or contributing Rust in a retrocomputing context
+- Collaborating on educational or documentation efforts
+
+Then feel free to **follow the project**, **star the repo**, or **submit a pull request**.
+
+All constructive feedback, critiques, and collaboration are warmly welcome!
+
+---
+
+## 📜 License
+
+This project is open-source and released under the **MIT License**.  
+Use it freely for learning, hacking, or contributing to low-level OS development.
+
+---
+
+## 🔗 Links
+
+> Coming soon: project website, YouTube series, ISO builds, and technical blog posts.
+
+Stay tuned!
 
