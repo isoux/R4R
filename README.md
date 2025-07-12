@@ -120,6 +120,16 @@ Use it freely for learning, hacking, or contributing to low-level OS development
 
 ---
 
+## 📘 Documentation
+
+Explore the internal design and development process of R4R:
+
+- 🧭 [Architecture & Design Philosophy](docs/architecture.md)  
+- 🛠️ [Development and Toolchain Overview](docs/development.md)  
+- 📚 [Documentation Index](docs/index.md)
+
+---
+
 ## 🔗 Links
 
 > Coming soon: project website, YouTube series, ISO builds, and technical blog posts.
