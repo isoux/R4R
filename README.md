@@ -135,3 +135,11 @@ Explore the internal design and development process of R4R:
 > Coming soon: project website, YouTube series, ISO builds, and technical blog posts.
 
 Stay tuned!
+
+---
+
+## 🙏 Acknowledgments
+
+This project was built with great effort, curiosity, and passion.  
+Special thanks to [OpenAI’s ChatGPT](https://openai.com/chatgpt) for helping me shape ideas, debug code, write documentation, and push this project forward in the right direction.  
+Its assistance proved invaluable in navigating both technical and conceptual challenges.
