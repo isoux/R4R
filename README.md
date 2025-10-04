@@ -66,6 +66,17 @@ The name **R4R** holds a layered meaning, carefully chosen to reflect both the s
 - Uses a **custom GDT and TSS** to demonstrate privilege separation
 - Demonstrates **Call Gates**, **Task Gates**, and transitions between all four rings
 
+### 🪶 Mili-kernel Design
+
+A *mili-kernel* is the minimal kernel entity for each ring (0–3).  
+Each mili-kernel owns its own scheduler, IRQ handling, and memory isolation within its domain.  
+Initialization of every ring is performed from inside the ring itself (via IRET frames), while Ring 0 only provides global services through call gates.  
+
+This ensures:
+- clear privilege separation from the start  
+- legitimate ownership of initialization inside each ring  
+- modularity and traceability of system state  
+
 ---
 
 ## 🏗️ Future Plans
@@ -143,3 +154,12 @@ Stay tuned!
 This project was built with great effort, curiosity, and passion.  
 Special thanks to [OpenAI’s ChatGPT](https://openai.com/chatgpt) for helping me shape ideas, debug code, write documentation, and push this project forward in the right direction.  
 Its assistance proved invaluable in navigating both technical and conceptual challenges.
+
+---
+
+## SCREENSHOTS
+
+![Compaq](assets/compaq.jpg)
+![Bochs](assets/bochs.png)
+![QEMU](assets/qemu.png)
+
