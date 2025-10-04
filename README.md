@@ -159,7 +159,7 @@ Its assistance proved invaluable in navigating both technical and conceptual cha
 
 ## SCREENSHOTS
 
-![Compaq](assets/compaq.jpg)
-![Bochs](assets/bochs.png)
-![QEMU](assets/qemu.png)
+![Compaq](assets/COMPAQ.jpg)
+![Bochs](assets/BOCHS.png)
+![QEMU](assets/QEMU.png)
 
