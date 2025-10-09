@@ -18,23 +18,15 @@ The R4R operating system is developed from scratch using the **GCC compiler** wi
 
 ### Build System
 
-The build system supports two main configurations:
-
-| Target | Output | Boot Method |
-|--------|--------|-------------|
-| `img`  | `.img` floppy image | GRUB v1 |
-| `iso`  | `.iso` CD image     | GRUB v2 |
-
-To switch between targets, modify the `BOOT_WAY` variable in `defines.mk`.
+The build system for now supports floppy image GRUB v1 configuration.
 
 Use the following make targets:
 
 ```sh
 make clean   # recommended before each full build
-make         # build floppy-based GRUB1 image
-make bochs   # run floppy-based GRUB1 image in Bochs
+make         # build folder build/ with objects and floppy-based build/sys_out/grub1.img
+make bochs   # run floppy-based grub1.img in Bochs
 ```
-
 ### Emulator Notes
 
 - **BOCHS** is recommended for debugging due to its excellent GUI debugger. Older BOCHS versions may be more compatible with Ubuntu 20.04.
