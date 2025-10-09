@@ -1,0 +1,14 @@
+# Generic GRUB boot menu, for floppy disk
+
+color green/black black/light-gray
+
+timeout=2
+
+title R4R
+    kernel /boot/load
+    module /boot/init init
+    module /boot/core core
+    module /boot/devs devs
+    module /boot/libs libs
+    module /boot/users users
+    boot

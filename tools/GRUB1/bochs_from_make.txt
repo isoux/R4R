@@ -1,0 +1,17 @@
+megs: 8
+romimage: file="/usr/local/share/bochs/BIOS-bochs-latest", address=0x00000000, options=none
+vgaromimage: file="/usr/local/share/bochs/VGABIOS-lgpl-latest"
+#romimage: file=/usr/share/bochs/BIOS-bochs-latest, address=0xfffe0000
+#vgaromimage: file=/usr/share/bochs/VGABIOS-lgpl-latest
+floppya: 1_44="build/sys_out/grub1.img", status=inserted
+boot: floppy
+mouse: enabled=0
+magic_break: enabled=1
+display_library: x, options="gui_debug"
+cpu: count=1:1:1, ips=4000000, quantum=16, model=bx_generic, reset_on_triple_fault=1, cpuid_limit_winnt=0, ignore_bad_msrs=1, mwait_is_nop=0
+cpuid: level=6, stepping=3, model=3, family=6, vendor_string="GenuineIntel", brand_string="              Intel(R) Pentium(R) 4 CPU        "
+cpuid: mmx=true, apic=xapic, simd=sse2, sse4a=false, misaligned_sse=false, sep=true
+cpuid: movbe=false, adx=false, aes=false, sha=false, xsave=false, xsaveopt=false, avx_f16c=false
+cpuid: avx_fma=false, bmi=0, xop=false, fma4=false, tbm=false, x86_64=true, 1g_pages=false
+cpuid: pcid=false, fsgsbase=false, smep=false, smap=false, mwait=true, vmx=1, svm=false
+
