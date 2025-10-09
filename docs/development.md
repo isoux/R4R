@@ -1,11 +1,11 @@
 # 🧰 Development and Toolchain Overview
 
-The R4R operating system is developed from scratch using the **GCC compiler** with **inline Intel-style assembly**, targeting **32-bit i386/i486 processors**. The core intent is to maintain full control over hardware behavior, particularly across all four x86 protection rings.
+The R4R operating system is developed from scratch using the **GCC compiler** with **inline assembly**, targeting **32-bit i386/i486 processors**. **Inline assembly** because R4R is strictly hardware-oriented and complex due to rings, so it is very important that the asm code be in c files and use everything from the domain of those files without unnecessary linking. This also provides better visibility, readability and understanding of the system ... The core intent is to maintain full control over hardware behavior, particularly across all four x86 protection rings. 
 
 ### Toolchain
 
-- **Compiler:** GCC (with support for Intel `__asm__` syntax)
-- **Assembler:** Inline assembly (Intel syntax only), no external `.S` or GAS-based files
+- **Compiler:** GCC (std=c23) with support for Intel `__asm__` syntax
+- **Assembler:** Inline assembly, no external `.S` or GAS-based files
 - **Bootloaders:** GRUB v1 (`img` build) and GRUB v2 (`iso` build)
 - **Emulators:** BOCHS (recommended with GUI debugger), QEMU (partially reliable)
 - **Target hardware:** Real Intel i486+ CPUs (system is tested on physical machines)
@@ -30,11 +30,9 @@ To switch between targets, modify the `BOOT_WAY` variable in `defines.mk`.
 Use the following make targets:
 
 ```sh
-make clean_all_objs   # recommended before each full build
-make img              # build floppy-based GRUB1 image
-make iso              # build CD-based GRUB2 ISO
-make bochs_iso_grub2  # run ISO in Bochs
-make bochs            # alias for bochs_iso_grub2
+make clean   # recommended before each full build
+make         # build floppy-based GRUB1 image
+make bochs   # run floppy-based GRUB1 image in Bochs
 ```
 
 ### Emulator Notes

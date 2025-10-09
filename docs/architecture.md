@@ -21,7 +21,7 @@ But what if we embraced that complexity?
 ### R4R's Unique Approach: 4 Milli-Kernels Across 4 Rings
 
 To manage that complexity, R4R divides its monolithic kernel into **four separate parts**, each living in its own protection ring.  
-These parts act like **mini-kernels (mKernels)** — small yet capable units, each with its own scheduler, signal handler, and interrupt controller.
+These parts act like **mili-kernels (mKernels)** — small yet capable units, each with its own scheduler, signal handler, and interrupt controller.
 
 | Ring | mKernel | Role  |
 |------|---------|-------|

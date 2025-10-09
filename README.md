@@ -34,7 +34,9 @@ It stems from a curiosity to explore underutilized or forgotten hardware feature
 
 - Minimal support will begin with the **Intel 486 (i486)** processor.
 - Will be **bootable from a floppy disk** for maximum compatibility with vintage PCs.
-- Designed to run on real hardware (i386/i486) as well as emulators like **QEMU**, **Bochs**, or **VirtualBox**.
+- Designed to run on real hardware (i386/i486) as well as emulators like **Bochs**, or **VirtualBox**.
+- Note: **QEMU** is currently unsuitable for testing this build due to a known issue with legacy i486 protected-mode task switching.
+See QEMU Bug 2024806 – “Protected mode LJMP via TSS/LDT fails with pc=nil.”
 
 ---
 
@@ -51,15 +53,15 @@ The name **R4R** holds a layered meaning, carefully chosen to reflect both the s
 
 ### 🌀 Other Interpretations
 
-- **Rings for Rust** — Reflects future plans to implement parts of the OS in [Rust](https://www.rust-lang.org/), especially where LLVM’s 32-bit support has presented challenges.
 - **Real 4 Rings** — Emphasizes the rare goal of fully implementing and demonstrating the interaction of all four x86 rings.
 - **Retro for Research** — Highlights the project's educational and artistic goals. This is a hobby OS — but with deep respect for retro computing and its research potential.
+- **Rings for Rust** — Reflects future plans to implement parts of the OS in [Rust](https://www.rust-lang.org/), especially where LLVM’s 32-bit support has presented challenges.
 
 ---
 
 ## 🔭 Technical Focus
 
-- Written in **C** (using **GCC**) with extensive use of **inline assembly**
+- Written in **C** (using **GCC-14** with std=c23) with extensive use of **inline assembly**
 - Based on the **Multiboot v1** boot specification
 - Targeting **i386 (32-bit x86)** architecture
 - Emulates or runs on real machines with **ring isolation** supported
@@ -81,9 +83,8 @@ This ensures:
 
 ## 🏗️ Future Plans
 
-- Progressive integration of **Rust** in kernel components
-- Real-mode or protected-mode bootstrapping with **full ring transition paths**
-- Detailed documentation on GDT, LDT, TSS, and descriptor generation
+- README documentation for version 0.00
+- Detailed documentation on GDT, LDT, TSS, and descriptor generation (there is already extensive documentation in the code)
 - Releasing ISO and emulator-ready builds for easy testing
 - Educational write-ups and videos to accompany the codebase
 
@@ -94,7 +95,7 @@ This ensures:
 The project is deeply inspired by early UNIX systems that ran on Intel 386 processors, and in particular the work of:
 
 - **William and Lynne Jolitz** — creators of **386BSD**, one of the first open-source ports of UNIX to the i386 platform
-- The simplicity, power, and elegance of **early x86 system architecture**
+- The simplicity, power, and elegance of **early i386 system architecture**
 - The desire to educate and inspire others to **explore hardware-level programming** for its own sake
 
 ---
@@ -115,10 +116,9 @@ If you're interested in:
 
 - Writing real-mode/protected-mode C and ASM
 - Exploring ring transitions, descriptors, or segmentation
-- Learning or contributing Rust in a retrocomputing context
 - Collaborating on educational or documentation efforts
 
-Then feel free to **follow the project**, **star the repo**, or **submit a pull request**.
+Then feel free to **follow the project** or **submit a pull request**.
 
 All constructive feedback, critiques, and collaboration are warmly welcome!
 
@@ -158,7 +158,11 @@ Its assistance proved invaluable in navigating both technical and conceptual cha
 ---
 
 ## SCREENSHOTS
+COMPAQ CONTURA AERO 4/33C
 
 ![Compaq](assets/COMPAQ.jpg)
+
+BOCHS EMULATOR
+
 ![Bochs](assets/BOCHS.png)
 
