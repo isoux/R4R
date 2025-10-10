@@ -111,10 +111,16 @@ Explore released versions of R4R:
 
 ## 🏗️ Future Plans
 
-- README documentation for version 0.00
-- Detailed documentation on GDT, LDT, TSS, and descriptor generation (there is already extensive documentation in the code)
+Planned for version **0.01**:
+- Introduce a minimal ring-aware scheduler  
+- Implement IRQ redirection and interrupt controller per ring  
+- Implement IRQ handler for keyboard input  
+- Introduce a minimal message-passing model between mKernels  
+- Extend Devs and Libs tasks to actively run loops or routines  
+- Expand paging into a partial virtual memory system  
+- Begin work on a small interactive user-space environment in Ring 3  
+- Documentation on GDT, LDT, TSS, and descriptor generation (there is already extensive documentation in the code)
 - Releasing ISO and emulator-ready builds for easy testing
-- Educational write-ups and videos to accompany the codebase
 
 ---
 
