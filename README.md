@@ -144,7 +144,8 @@ Use it freely for learning, hacking, or contributing to low-level OS development
 Explore the internal design and development process of R4R:
 
 - 🧭 [Architecture & Design Philosophy](docs/architecture.md)  
-- 🛠️ [Development and Toolchain Overview](docs/development.md)  
+- 🛠️ [Development and Toolchain Overview](docs/development.md)
+- 🧱 [Version 0.00](docs/version_0.00.md) 
 - 📚 [Documentation Index](docs/index.md)
 
 ---

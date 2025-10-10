@@ -9,6 +9,7 @@ This project explores all four x86 protection rings with a focus on deep hardwar
 
 - 🧭 [Architecture & Design Philosophy](architecture.md)  
 - 🛠️ [Development and Toolchain](development.md)
+- 🧱 [Version 0.00](version_0.00.md)
 
 ---
 
