@@ -2,6 +2,8 @@
 
 # 🛡️ R4R — Rusted 4 Rings
 
+*(The first attempt at this system can be found here: [4RING_OS](https://github.com/isoux/4RING_OS))*
+
 > A hobby operating system experiment for educational and artistic purposes.
 
 **R4R** is a hobby operating system project built from scratch with the goal of fully demonstrating the functionality and interplay of all four Intel x86 privilege levels — Ring 0 to Ring 3 — starting from the i386 architecture.
