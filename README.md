@@ -26,6 +26,14 @@ Surprisingly, no public code example or documentation clearly showcases how **Ri
 
 This project aims to answer that question — even if only partially — and in doing so, encourages others to look back at the hardware roots of operating system design.
 
+## 💡 Inspiration
+
+The project is deeply inspired by early UNIX systems that ran on Intel 386 processors, and in particular the work of:
+
+- **William and Lynne Jolitz** — creators of **386BSD**, one of the first open-source ports of UNIX to the i386 platform
+- The simplicity, power, and elegance of **early i386 system architecture**
+- The desire to educate and inspire others to **explore hardware-level programming** for its own sake
+
 ## Project Description
 
 **R4R** is an *experimental hobbyist operating system* designed to showcase and demystify the functionality and interaction of all four Intel x86 protection rings (Ring 0–3), starting with the i386 architecture. It is not intended as a full-fledged operating system, but rather a platform for learning, demonstration, and artistic expression.
@@ -83,25 +91,6 @@ This ensures:
 
 ---
 
-## 🏗️ Future Plans
-
-- README documentation for version 0.00
-- Detailed documentation on GDT, LDT, TSS, and descriptor generation (there is already extensive documentation in the code)
-- Releasing ISO and emulator-ready builds for easy testing
-- Educational write-ups and videos to accompany the codebase
-
----
-
-## 💡 Inspiration
-
-The project is deeply inspired by early UNIX systems that ran on Intel 386 processors, and in particular the work of:
-
-- **William and Lynne Jolitz** — creators of **386BSD**, one of the first open-source ports of UNIX to the i386 platform
-- The simplicity, power, and elegance of **early i386 system architecture**
-- The desire to educate and inspire others to **explore hardware-level programming** for its own sake
-
----
-
 ## 🧠 Why This Still Matters
 
 > *“In the age of abstracted software layers, managed runtimes, and portable VMs, one could ask — why bother with legacy features like 4 protection rings?”*
@@ -109,6 +98,23 @@ The project is deeply inspired by early UNIX systems that ran on Intel 386 proce
 The answer is simple: **curiosity, art, education, and homage**.
 
 We’re not here to reinvent the wheel — we’re here to examine the spokes and admire the mechanics.
+
+---
+
+## 🧩 Versions
+
+Explore released versions of R4R:
+
+- 🧱 [Version 0.00](docs/version_0.00.md) — The first complete 4-ring boot and transition proof-of-concept.
+
+---
+
+## 🏗️ Future Plans
+
+- README documentation for version 0.00
+- Detailed documentation on GDT, LDT, TSS, and descriptor generation (there is already extensive documentation in the code)
+- Releasing ISO and emulator-ready builds for easy testing
+- Educational write-ups and videos to accompany the codebase
 
 ---
 
