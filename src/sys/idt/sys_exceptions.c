@@ -33,10 +33,6 @@ void sys_print_color(const char* msg, u8 color) {
     syscall_printr(msg, color);
 }
 
-void sys_print_color(const char* msg, u8 color) {
-    syscall_printr(msg, color);
-}
-
 void sys_int_0(void) {
     sys_print_color(
         "FAULT: 0 |0x00| #DE | **Divide Error**\n"
