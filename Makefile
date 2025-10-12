@@ -43,8 +43,8 @@ link-init:
 	@echo "--- Linking init.elf ---"
 	ld -T src/sys/init/init.ld -nostdlib  -m elf_i386 \
 		build/init/init.o build/gdt/gdt_build.o build/gdt/gdt_init.o \
-		build/idt/idt_build.o build/page/pages_build.o build/init/main.o \
-		-o build/init/init.elf
+		build/idt/idt_build.o build/idt/sys_exceptions.o build/page/pages_build.o \
+		build/init/main.o -o build/init/init.elf
 	objdump -d -D -M intel build/init/init.elf >> build/dumps/init.dump
 		
 link-core: 

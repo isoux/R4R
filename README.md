@@ -63,15 +63,23 @@ The name **R4R** holds a layered meaning, carefully chosen to reflect both the s
 
 ### 🌀 Other Interpretations
 
-- **Real 4 Rings** — Emphasizes the rare goal of fully implementing and demonstrating the interaction of all four x86 rings.
-- **Retro for Research** — Highlights the project's educational and artistic goals. This is a hobby OS — but with deep respect for retro computing and its research potential.
-- **Rings for Rust** — Reflects future plans to implement parts of the OS in [Rust](https://www.rust-lang.org/), especially where LLVM’s 32-bit support has presented challenges.
+- **Real 4 Rings** — Emphasizes the rare goal of fully implementing and demonstrating the interaction of all four x86 rings.  
+- **Retro for Research** — Highlights the project's educational and artistic goals. This is a hobby OS — but with deep respect for retro computing and its research potential.  
+- **Rings for Rust** — Perhaps one day, someone will wish to bring this idea to life using the **Rust** programming language.  
+  That would be a beautiful continuation of the same curiosity that started here — only in a safer, more modern language.
+
 
 ---
 
 ## 🔭 Technical Focus
 
 - Written in **C** (using **GCC-14** with std=c23) with extensive use of **inline assembly**
+
+> 🧩 **Why I chose C for R4R:**  
+> After exploring alternatives like Zig and Rust, I concluded that C remains the most practical, predictable, and hardware-transparent language for low-level system development on 32-bit Intel machines.  
+> My reasoning is explained in detail in this forum post:  
+> 👉 [“A Warm Acknowledgment and an Objective Conclusion from an Enthusiast” — FreeBSD Forum](https://forums.freebsd.org/threads/zig-programming-language.88728/page-6#post-710025)
+
 - Based on the **Multiboot v1** boot specification
 - Targeting **i386 (32-bit x86)** architecture
 - Emulates or runs on real machines with **ring isolation** supported
@@ -111,18 +119,34 @@ Explore released versions of R4R:
 
 ## 🏗️ Future Plans
 
+> 🧱 *“Every version builds a foundation for the next — not by replacing what came before,  
+but by extending its logic into new dimensions of hardware.”*
+
+One of the long-term goals is to bring this same 4-ring concept to the **x86_64 architecture**,  
+showing that the fundamental principles of ring-based separation and hardware privilege transitions  
+can still function — even within the more abstracted 64-bit environment.
+
 Planned for version **0.01**:
-- Introduce a minimal ring-aware scheduler  
-- Implement IRQ redirection and interrupt controller per ring  
-- Implement IRQ handler for keyboard input  
-- Introduce a minimal message-passing model between mKernels  
-- Extend Devs and Libs tasks to actively run loops or routines  
-- Expand paging into a partial virtual memory system  
-- Begin work on a small interactive user-space environment in Ring 3  
-- Documentation on GDT, LDT, TSS, and descriptor generation (there is already extensive documentation in the code)
-- Releasing ISO and emulator-ready builds for easy testing
+
+- Introduce a minimal **ring-aware scheduler**  
+- Implement **IRQ redirection** and **interrupt controller per ring**  
+- Implement **IRQ handler for keyboard input**  
+- Introduce a minimal **message-passing model** between mKernels  
+- Extend **Devs** and **Libs** tasks to actively run loops or routines  
+- Expand paging into a **partial virtual memory system**  
+- Begin work on a **small interactive user-space environment** in Ring 3  
+- Add **detailed documentation** on GDT, LDT, TSS, and descriptor generation  
+  (there is already extensive documentation in the code)  
+- Release **ISO and emulator-ready builds** for easier testing and demonstration  
 
 ---
+
+🧩 **Long-Term Vision:**  
+R4R’s next evolutionary step is not only to stabilize its 32-bit foundation,  
+but also to prove that the same architectural purity —  
+the idea of true hardware-managed rings —  
+can transcend into the 64-bit era without losing its philosophical or technical integrity.
+
 
 ## 🤝 Get Involved
 

@@ -22,5 +22,8 @@ void core_print(const char *msg);
 // Flexible print (you pass the color)
 void core_print_color(const char *msg, u8 color);
 
+// Flexible print (you pass the color and position)
+void core_print_color_at(const char *msg, u8 color, u8 row, u8 col);
+
 
 #endif // CORE_PRINT_H

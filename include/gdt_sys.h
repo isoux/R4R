@@ -3,7 +3,7 @@
  *
  * - Indentation: 4 spaces
  *
- * gdt_sys.h
+ * include/gdt_sys.h
  *
  * Global Descriptor Table definitions.
  * All 8192 descriptors is used,

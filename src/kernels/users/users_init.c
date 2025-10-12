@@ -38,7 +38,7 @@ void print_R3_msg (void) {
     print_color(
         "  _       _\n"
         " |_| |_| |_| -> 0.00 version!\n"
-        " | \\   | | \\ <- 2025 year!  |\n\n",
+        " | \\   | | \\ <- 2025 year 4/4\n\n",
         LOGO_COLOR
     );
 }
