@@ -14,6 +14,25 @@
 
 #include "sys_exceptions.h"
 
+/*
+ * Interesting observation:
+ * The function below calls `syscall_printr()`, which in turn triggers a **call gate**
+ * from Ring 0 (still during the init phase, running at the 2MB address) into
+ * the already initialized Ring 0 Core mili-kernel — meaning this happens entirely
+ * at runtime within the same privilege level.
+ *
+ * In other words, even a call gate invocation from Ring 0 to Ring 0 works perfectly.
+ * This demonstrates once again the **superiority and flexibility of call gates**,
+ * proving that they are not limited to privilege transitions only.
+ *
+ * Performance is not a concern here — these routines mainly handle fault
+ * and abort exceptions, where clarity and stability are more important
+ * than speed.
+ */
+void sys_print_color(const char* msg, u8 color) {
+    syscall_printr(msg, color);
+}
+
 void sys_print_color(const char* msg, u8 color) {
     syscall_printr(msg, color);
 }
