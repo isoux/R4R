@@ -83,7 +83,6 @@ __attribute__((naked)) void comm_ignore_int(void) {
         ".intel_syntax noprefix\n\t"
         "push ds\n\t"
         "push eax\n\t"
-        "nop \n\t"
         "pop eax\n\t"
         "pop ds\n\t"
         "iretd\n\t"
