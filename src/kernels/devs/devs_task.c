@@ -130,7 +130,7 @@ void setup_devs_tasks(void) {
 
     // LDT_DEVS
     // Access byte: LDT Segment, Ring 1, Selector 0x60
-    base  = (u32)(u32)ldt_devs;
+    base  = (u32)ldt_devs;
     limit = (u32)(LDT_ENTRIES * 8) - 1;
     desc = set_devs_tss_ldt_desc(SYS_LDT, base, limit);
     syscall_gdt_desc_set(LDT_DEVS, desc);
