@@ -43,7 +43,7 @@ link-init:
 	@echo "--- Linking init.elf ---"
 	ld -T src/sys/init/init.ld -nostdlib  -m elf_i386 \
 		build/init/init.o build/gdt/gdt_build.o build/gdt/gdt_init.o \
-		build/idt/idt_build.o build/idt/sys_exceptions.o build/page/pages_build.o \
+		build/idt/idt_build.o build/page/pages_build.o \
 		build/init/main.o -o build/init/init.elf
 	objdump -d -D -M intel build/init/init.elf >> build/dumps/init.dump
 		
@@ -51,7 +51,8 @@ link-core:
 	@echo "--- Linking core.elf ---"
 	ld -T src/kernels/core/core.ld -nostdlib  -m elf_i386 \
 	    build/core/core_init.o build/core/core_task.o build/core/core_call_gates.o \
-	    build/core/gdt.o build/core/core_syscalls.o  build/core/print/core_print.o \
+	    build/core/gdt.o build/core/idt_setup.o build/core/sys_exceptions.o \
+	    build/core/core_syscalls.o build/core/print/core_print.o \
 	    build/core/print/core_textio.o -o build/core/core.elf
 	objdump -d -D -M intel build/core/core.elf >> build/dumps/core.dump
 	
