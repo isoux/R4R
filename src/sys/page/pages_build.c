@@ -3,11 +3,11 @@
  *
  * - Indentation: 4 spaces
  *
- * pages_build.c
+ * sys/page/pages_build.c
  *
  * Memory Segmentation Notes:
  * - Full identity mapping of 0–8MB.
- * - pg_tab0 (PDE[0]): maps 0–4MB, user-accessible (U/S=1), except lowher 1MB now U/S=0.
+ * - pg_tab0 (PDE[0]): maps 0–4MB, user-accessible (U/S=1), except lower 1MB now U/S=0.
  * - pg_tab1 (PDE[1]): maps 4–8MB with mixed access.
  *   - First 4MB–7936KB are user-accessible (U/S=1).
  *   - Final 128KB (0x007E0000–0x007FFFFF) are supervisor-only (U/S=0).
