@@ -3,7 +3,7 @@
  *
  * - Indentation: 4 spaces
  *
- * SYSs/core/core_init.c
+ * kernels/core/core_init.c
  *
  * (C) Copyright 2025 Isa <isa@isoux.org>
  */
