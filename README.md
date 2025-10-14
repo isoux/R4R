@@ -114,7 +114,8 @@ We’re not here to reinvent the wheel — we’re here to examine the spokes an
 Explore released versions of R4R:
 
 - 🧱 [Version 0.00](docs/version_0.00.md) — The first complete 4-ring boot and transition proof-of-concept.  
-  🔗 **[R4R_0.00 Release!](https://github.com/isoux/R4R/releases/tag/R4R_0.001)**
+  🔗 **[R4R_0.00 Release!](https://github.com/isoux/R4R/releases/tag/R4R_0.001)**  
+  📝 [Log of changes toward Version 0.01](docs/Log_to_ver_0.01.md) — Progressive log of updates and improvements leading to the next milestone.
 
 ---
 
