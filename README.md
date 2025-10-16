@@ -119,6 +119,13 @@ Explore released versions of R4R:
 
 ---
 
+## 🌐 Community
+
+💬 Join the discussion or follow progress on the FreeBSD Forums:  
+[🧵 Humble Hobby OS Project (FreeBSD Forums)](https://forums.freebsd.org/threads/humble-hobby-os-project.99600/)
+
+---
+
 ## 🏗️ Future Plans
 
 > 🧱 *“Every version builds a foundation for the next — not by replacing what came before,  
