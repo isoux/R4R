@@ -109,6 +109,27 @@ We’re not here to reinvent the wheel — we’re here to examine the spokes an
 
 ---
 
+# 🌌 Assumptions and Vision
+_(Note: These are conceptual ideas from a self-taught hobbyist — they may be naive, but I hope they spark curiosity or discussion.)_
+
+There is a growing trend of using FreeBSD jails to limit what the root user can do, and while that is achieved through software, I have a hypothesis that with the 4-ring model, a similar kind of restriction could be achieved in a different, more direct way at the hardware level.
+
+Modern systems also tend to offload certain kernel functions to user space, reducing overhead while preserving system integrity. The 4-ring model could approach this differently, since Rings 1, 2, and 3 already support segmentation-based memory protections. Although they share the user bit (U/S=1) with Ring 3, segmentation still enables meaningful isolation. This could allow kernel-like services to run in these rings, easing the burden on Ring 0 while retaining safety.
+
+Another emerging trend is the adoption of Rust in kernel development, primarily for memory safety. However, my belief is that with this architecture, higher-level languages may not be necessary. The combined use of C and assembly could be sufficient, thanks to the structure and isolation built into the ring system itself.
+
+While some may argue that frequent call gates and task switches could slow the system, I believe the reduced code bloat can keep performance stable, or even improve it.
+
+This system could enable a highly versatile combination of milli-kernels, each suited to specific needs, allowing tasks to move through rings gradually or directly as required. Different configurations for different needs would make this system incredibly flexible, surpassing monolithic kernels.
+
+As someone still learning, I'm excited to explore whether these ideas can truly become reality.
+
+The very fact that a task in ring 3 must have four stacks—one for itself and one for each of the more privileged rings—already demonstrates how protected and memory-safe this model can be. With separate stacks for each ring, it becomes much harder for memory in one ring to be corrupted by another.
+
+_(These ideas are not final — just stepping stones for experimentation.The beauty of hobby projects like this is the freedom to explore without pressure, and R4R is exactly that: a safe space for curious OS design.)_
+
+---
+
 ## 🧩 Versions
 
 Explore released versions of R4R:
