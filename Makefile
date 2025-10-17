@@ -52,7 +52,7 @@ link-core:
 	ld -T src/kernels/core/core.ld -nostdlib  -m elf_i386 \
 	    build/core/core_init.o build/core/core_task.o build/core/core_call_gates.o \
 	    build/core/gdt.o build/core/idt_setup.o build/core/sys_exceptions.o \
-	    build/core/core_syscalls.o build/core/print/core_print.o \
+	    build/core/core_syscalls.o build/core/sys_init.o build/core/print/core_print.o \
 	    build/core/print/core_textio.o -o build/core/core.elf
 	objdump -d -D -M intel build/core/core.elf >> build/dumps/core.dump
 	

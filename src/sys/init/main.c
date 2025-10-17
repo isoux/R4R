@@ -9,7 +9,7 @@
  * - Indentation: 4 spaces (no tabs)
  *
  * Initialization philosophy:
- *     - Each ring (1–3) is entered via an IRET frame from Ring 0.
+ *     - Each ring (1–3) is entered via an IRET frame from init module at Ring 0.
  *     - A continuation address (where Ring 0 should resume) is placed in EAX
  *       before IRET; general-purpose registers survive the privilege change.
  *     - After a ring finishes its own init, it returns control to Ring 0 via a
@@ -53,15 +53,15 @@
 #define EIFLAGS_R2 0
 #define EIFLAGS_R3 0
 
-/* Helper: return address as u32 (readability) */
+// Helper: return address as u32 (readability)
 __attribute__((always_inline))
 static inline u32 core_set_resume(void (*fn)(void)) {
     return (u32)(uintptr_t)fn;
 }
 
-static void after_devs(void);
-static void after_libs(void);
-static void after_users(void);
+static void after_setup_devs(void);
+static void after_setup_libs(void);
+static void after_setup_users(void);
 
 __attribute__((always_inline))
 static inline void setup_core(void) {
@@ -71,7 +71,7 @@ static inline void setup_core(void) {
     );
 }
 
-/* General IRET with continuation in EAX */
+// General IRET with continuation in EAX
 __attribute__((always_inline))
 static inline void iret_to_ringX_with_cont(u32 eip, u16 cs, u32 eflags,
     u32 esp, u16 ss, u32 cont)
@@ -80,19 +80,24 @@ static inline void iret_to_ringX_with_cont(u32 eip, u16 cs, u32 eflags,
     u32 ss32 = (u32)ss;
 
     __asm__ __volatile__ (
-        /* put continuation into EAX */
-        /* variant 1 (shorter): use "a"(cont) constraint only */
-        "pushl %4 \n\t"   /* SS'  */
-        "pushl %3 \n\t"   /* ESP' */
-        "pushl %2 \n\t"   /* EFLAGS */
-        "pushl %1 \n\t"   /* CS'  */
-        "pushl %0 \n\t"   /* EIP' */
+        // put continuation into EAX
+        // variant 1 (shorter): use "a"(cont) constraint only
+        "pushl %4 \n\t"   // SS
+        "pushl %3 \n\t"   // ESP
+        "pushl %2 \n\t"   // EFLAGS
+        "pushl %1 \n\t"   // CS
+        "pushl %0 \n\t"   // EIP
         "iret     \n\t"
         :
         : "r"(eip), "r"(cs32), "r"(eflags), "r"(esp), "r"(ss32),
-          "a"(cont)              /* EAX = cont */
+          "a"(cont)       // EAX = cont
         : "memory"
     );
+}
+
+void sys_setup(void) {
+    iret_to_ringX_with_cont(CORE_START, CORE_CODE, 0,
+            CORE_STACK, CORE_DATA, SYS_INIT);
 }
 
 void setup_devs(u32 cont) {
@@ -113,41 +118,39 @@ void setup_users(u32 cont) {
 void main(void){
     setup_core();
 
-    u32 cont = core_set_resume(after_devs);
+    u32 cont = core_set_resume(after_setup_devs);
     setup_devs(cont);
 
-    trap_halt();
+    trap_halt();  // not reached
 }
 
-/* Here you continue when Ring1 calls CG_CORE_RESUME */
-static void after_devs(void) {
-    u32 cont = core_set_resume(after_libs);
+// Here you continue when Ring1 calls CG_CORE_RESUME
+static void after_setup_devs(void) {
+    u32 cont = core_set_resume(after_setup_libs);
     setup_libs(cont);
 
     trap_halt();  // not reached
 }
 
-static void after_libs(void) {
-    u32 cont = core_set_resume(after_users);
+static void after_setup_libs(void) {
+    u32 cont = core_set_resume(after_setup_users);
     setup_users(cont);
 
     trap_halt();  // not reached
 }
 
-static void after_users(void) {
+// Since all initialization from the init module is now complete at this point
+// in the code, the init module needs to be cleared.
+// Now, the pointer for the remaining sys init phase is set to the core domain
+// of the milli-kernel, and after that, the final initialization can be done,
+// freeing the memory that was used for GRUB, LOADER, and the init-main phase.
+static void after_setup_users(void) {
 
-    struct {
-        u32 func_ptr;
-        u16 selector;
-    } __attribute__((packed)) far_jmp_args = {
-        .func_ptr = 0,
-        .selector = TSS_MAIN_TASK
-    };
-
-    // From this point onward, the context switch jumps permanently into the
-    // user-space main task (Ring 3). All kernels and rings initialization phases
-    // have been completed, and execution continues in the main user task.
-    __asm__ volatile ("ljmp *%0" : : "m"(far_jmp_args));
+    // All kernels and rings initialization phases have been completed,
+    // and execution continues in the resume_sys_setup() at core_init.c
+    // via  via an IRET frame from sys_setup(), where the SYS_INIT value
+    // is passed through the EAX register.
+    sys_setup();
 
     trap_halt();  // not reached
 }

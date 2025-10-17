@@ -17,6 +17,7 @@
 #include <typedef.h>
 #include <gdt_sys.h>
 
+#define SYS_INIT 0xFF
 #define MEM_LIMIT ((MEM_SIZE) / 0x1000) - 1     // 0x7ff
 
 #define CORE_SIZE 64*1024 	                    // 64Kb

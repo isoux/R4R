@@ -10,10 +10,10 @@
 
 #include <typedef.h>
 #include <gdt_sys.h>
+#include <gdt/gdt_build.h>
 #include <sys.h>
 #include <task.h>
 #include <ldt.h>
-#include <gdt/gdt_build.h>
 
 #define LDT_ENTRIES 2
 
@@ -23,14 +23,16 @@ extern void gdt_tss_set(u16 selector, struct tss32 *tss);
 __attribute__((used, aligned(16)))
  struct tss32 tss_core = { 0 };
 
-//__attribute__((aligned(4096)))
-u32 ring0_stack[1024];
-struct stack_ptr r0_stack =
-    { &ring0_stack[1024] };
+// The reason for hardcoding the stack pointer here is that it’s placed at the end
+// of the core milli-kernel. After the iret frames from the init phase, there is no
+// valid stack for the core. By setting it here within the task, it becomes the active
+// ring 0 stack without needing manual switching it from LPR (lower priv. ring) returns.
+// It also serves as the default kernel stack for code outside of tasks.
+u32 r0_stack = CORE_STACK;
 
-u32 task_stack[1024];
+u32 task_stack[256];
 struct stack_ptr stack =
-    { &task_stack[1024] };
+    { &task_stack[256] };
 
 __attribute__((used, aligned(16)))
  u64 ldt_core[LDT_ENTRIES] =
@@ -102,12 +104,15 @@ void core_ldt_activate(void) {
 }
 
 void core_main_task(void) {
-    ;;
+
+    for (;;) {
+        ;
+    }
 }
 
 void setup_tss_core_struct(void) {
     tss_core.ring0_st_seg = CORE_DATA;
-    tss_core.ring0_stack = (u32) r0_stack.end_stack; // ptr → u32 (ESP0)
+    tss_core.ring0_stack = r0_stack;                 // ptr → u32 (ESP0)
     tss_core.task_stack = (u32) stack.end_stack;     // ESP
     tss_core.debug_trap = 0;
     tss_core.io_map_base = 0xFFFF;                   // core: disable IOPB
