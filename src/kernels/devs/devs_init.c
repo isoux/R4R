@@ -19,6 +19,8 @@
 
 extern void setup_devs_call_gates(void);
 extern void setup_devs_tasks(void);
+extern void setup_devs_idt(void);
+
 
 void print_R1_msg(void) {
     syscall_printr(
@@ -35,6 +37,7 @@ void setup_devs(void) {
 
     setup_devs_call_gates();
     setup_devs_tasks();
+    setup_devs_idt();
     // ...
 
     print_R1_msg();

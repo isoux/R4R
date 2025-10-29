@@ -21,6 +21,7 @@
 
 extern void gdt_call_gate_set(u16, void (*)(void), u8);
 extern void gdt_set_desc(u32 index, u64 descriptor);
+extern void idt_set_entry(u32 index, void (*handler)(void), u8 dpl);
 
 
 /* Call-gate entry (Ring0).
@@ -201,4 +202,27 @@ __attribute__((naked)) void cg_entry_printr(void)
         // Return to caller, nothing to discard
         "lret \n\t"
     );
+}
+
+/*
+ * Call-gate entry for setup IDT table (Ring 0).
+ */
+__attribute__((naked)) void cg_entry_idt_set(void) {
+    __asm__ __volatile__ (
+            // Switch DS to core data segment using SI instead of AX
+            "movw %ds, %di\n\t"                  // Save old DS in DI
+            "movw $" STR(CORE_DATA) ", %si\n\t"  // Load CORE segment selector into SI
+            "movw %si, %ds\n\t"                  // Move the CODE selector from SI to DS
+
+            // --- Default print (no position) ---
+            "pushl %eax\n\t"                     // Push dpl
+            "pushl %ebx\n\t"                     // Push handler
+            "pushl %ecx\n\t"                     // Push index
+            "call  idt_set_entry\n\t"            // Call the C function
+            "addl  $12, %esp\n\t"                // Clean up the stack (3 arguments * 4 bytes)
+            // Restore DS
+            "movw %di, %ds\n\t"                  // Restore DS from DI
+            // Return to caller, nothing to discard
+            "lret \n\t"
+        );
 }

@@ -25,7 +25,7 @@
 void setup_idt(void);
 
 // Dynamically set a specific IDT entry
-void idt_set_entry(int index, void (*handler)(void), u8 dpl);
+void idt_set_entry(u32 index, void (*handler)(void), u8 dpl);
 
 #endif /* IDT_BUILD_H */
 

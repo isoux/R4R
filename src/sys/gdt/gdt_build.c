@@ -153,7 +153,7 @@ void gdt_fill_table(void) {
 
     // USRS_ACCES_DATA
     // To access interrupts from users to devs.
-    // Access byte: Data Segment, Ring 3, Selector 0xF0, Present
+    // Access byte: Data Segment, Ring 3, Selector 0xB0, Present
     // Limit must be devs limit
     limit = DEVS_LIMIT;
     access = ACCESS_BYTE(DATA_READ_WRITE, RING_3, PRESENT);
@@ -161,11 +161,19 @@ void gdt_fill_table(void) {
     descriptor = make_gdt_descriptor(base, limit, access, flags);
     gdt_set_descriptor(22, descriptor);
 
+    //CG_IDT_SET  selector 0xB8 decs. for RING 0 from RING 3
+    u8 type = SYS_CALL_GATE;
+    u16 selector = CORE_CODE;
+    u8 dpl = DPL_RING_3;
+    u8 count = 0;
+    u32 offset = 0; // Placeholder for now, function will be filled in later
+    descriptor = make_call_gate_descriptor(selector, offset, dpl, type, count);
+    gdt_set_descriptor(23, descriptor);
+
     // RESERVED
     /*
-     gdt_set_descriptor(23, 0); Selector 0xB8
      gdt_set_descriptor(24, 0); Selector 0xC0
-     gdt_set_descriptor(25, 0); Selector 0cC8
+     gdt_set_descriptor(25, 0); Selector 0xC8
      gdt_set_descriptor(26, 0); Selector 0xD0
      gdt_set_descriptor(27, 0); Selector 0xD8
      gdt_set_descriptor(28, 0); Selector 0xE0
@@ -176,11 +184,11 @@ void gdt_fill_table(void) {
 
     /// CALL GATES
     // CG_CORE_TX_IRQ selector 0x100 decs. for RING 0 from RING 3
-    u8 type = SYS_CALL_GATE;
-    u16 selector = CORE_CODE;
-    u8 dpl = DPL_RING_3;
-    u8 count = 1;
-    u32 offset = 0; // Placeholder for now, function will be filled in later
+    type = SYS_CALL_GATE;
+    selector = CORE_CODE;
+    dpl = DPL_RING_3;
+    count = 1;
+    offset = 0; // Placeholder for now, function will be filled in later
     descriptor = make_call_gate_descriptor(selector, offset, dpl, type, count);
     gdt_set_descriptor(32, descriptor);
     // CG_CORE_PRINTR selector 0x108 decs. for RING 0 from RING 3

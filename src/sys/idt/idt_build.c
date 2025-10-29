@@ -27,7 +27,7 @@ struct __packed_ idt_opcode_p {
 static struct idt_opcode_p idt_opcode;
 
 void idt_prepare(void) {
-    idt_opcode.size = IDT_ENTRIES - 1;
+    idt_opcode.size = (IDT_ENTRIES * 8) - 1;
     idt_opcode.idt = idt_table;
 };
 
@@ -61,8 +61,9 @@ void setup_idt(void) {
 
 
 // Dynamically set specific IDT entry
-void idt_set_entry(int index, void (*handler)(void), u8 dpl) {
+void idt_set_entry(u32 index, void (*handler)(void), u8 dpl) {
     u32 handler_addr = (u32)handler;
+    u32 * idt_table = (u32 *) IDT_START;
 
     u32 descriptor_low = (handler_addr & 0xFFFF) | (CORE_CODE << 16);
     u32 descriptor_high = ((0x8E | (dpl << 5)) << 8)

@@ -15,6 +15,7 @@
 // External prototypes
 extern void gdt_call_gate_set(u16, void (*)(void), u8);
 extern void cg_entry_gdt_set(void);
+extern void cg_entry_idt_set(void);
 extern void cg_entry_printr(void);
 
 /* Shared continuation pointer lives in core binary */
@@ -42,4 +43,5 @@ void setup_core_call_gates(void) {
     gdt_call_gate_set(CG_CORE_PRINTR, cg_entry_printr, 0);
     gdt_call_gate_set(CG_GDT_SET, cg_entry_gdt_set, 0);
     gdt_call_gate_set(CG_CORE_RESUME, cg_core_resume_stub, 0);
+    gdt_call_gate_set(CG_IDT_SET, cg_entry_idt_set, 0);
 }

@@ -60,9 +60,9 @@
 #define TSS_USERS_TASK  0xA8
 #define USRS_ACCES_DATA 0xB0
 
-/* Reserved */
-/*
-#define X 0xB8
+#define CG_IDT_SET      0xB8
+
+/* Reserved
 #define X 0xC0
 #define X 0xC8
 #define X 0xD0
