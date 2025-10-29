@@ -34,6 +34,8 @@ The project is deeply inspired by early UNIX systems that ran on Intel 386 proce
 - The simplicity, power, and elegance of **early i386 system architecture**
 - The desire to educate and inspire others to **explore hardware-level programming** for its own sake
 
+*“Now that the Unix arms race is over, where both Linux and 386BSD were under great pressure to implement quickly (with Linux overtaking due to 386BSD's legal issues), there is now a chance to carefully and patiently explore the full hardware potential of an architecture, in a different way.”*
+
 ## Project Description
 
 **R4R** is an *experimental hobbyist operating system* designed to showcase and demystify the functionality and interaction of all four Intel x86 protection rings (Ring 0–3), starting with the i386 architecture. It is not intended as a full-fledged operating system, but rather a platform for learning, demonstration, and artistic expression.

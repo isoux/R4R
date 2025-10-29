@@ -11,14 +11,13 @@
 #include <typedef.h>
 #include <gdt_sys.h>
 #include <sys.h>
-#include <task.h>
+
 #include <ldt.h>
 #include <gdt/gdt_types.h>
 #include <gdt/gdt_build.h>
 #include <sys/sys_gdt.h>
 
-#define LDT_ENTRIES 2
-#define STACK_SIZE 0x100
+#include "users_task.h"
 
 extern void users_main_task(void);
 extern void users_nested_task(void);
@@ -104,8 +103,8 @@ void setup_tss_users_main_struct(void){
     tss_users_main.ds = USERS_LDT_DATA; tss_users_main._res_ds = 0;
     tss_users_main.es = USERS_LDT_DATA; tss_users_main._res_es = 0;
     tss_users_main.fs = USERS_LDT_DATA; tss_users_main._res_fs = 0;
-    tss_users_main.gs = USERS_LDT_DATA; tss_users_main._res_gs = 0;
-    tss_users_main.eflags = 0x00001000; // IF=0 IOPL=1
+    tss_users_main.gs = USRS_ACCES_DATA; tss_users_main._res_gs = 0;
+    tss_users_main.eflags = 0x00001200; // IF=1 IOPL=1
     tss_users_main.ldt = LDT_USERS; tss_users_main._res_ldt = 0;
 }
 
@@ -126,7 +125,7 @@ void setup_tss_users_nested_struct(void){
     tss_users_nested.es = USERS_LDT_DATA; tss_users_nested._res_es = 0;
     tss_users_nested.fs = USERS_LDT_DATA; tss_users_nested._res_fs = 0;
     tss_users_nested.gs = USERS_LDT_DATA; tss_users_nested._res_gs = 0;
-    tss_users_nested.eflags = 0x00001200; // IF=1 IOPL=1
+    tss_users_nested.eflags = 0x00001000; // IF=1 IOPL=1
     tss_users_nested.ldt = LDT_USERS; tss_users_nested._res_ldt = 0;
 }
 

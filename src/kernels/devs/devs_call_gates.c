@@ -34,7 +34,9 @@ u64 set_devs_cg_desc(u8 dpl, void (*handler)(void), u8 count) {
 void setup_devs_call_gates(void) {
     u64 desc;
     // CG_DEVS_TTY_W  selector 0x118 decs. for RING 1 from RING 2
-    desc = set_devs_cg_desc(DPL_RING_2, devs_tty_write, 3);
+    // desc = set_devs_cg_desc(DPL_RING_2, devs_tty_write, 3);
+    desc = set_devs_cg_desc(DPL_RING_3, devs_tty_write, 0);
     syscall_gdt_desc_set(CG_DEVS_TTY_W, desc);
 
 }
+

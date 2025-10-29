@@ -56,10 +56,11 @@
  * This function calls call_gate.
  */
 __attribute__((always_inline))
-static inline void syscall_call_gate_set(u16 selector, void (*handler)(void), u8 param)
+static inline void
+syscall_call_gate_set(u16 selector, void (*handler)(void), u8 param)
 {
     __asm__ __volatile__ (
-        "lcall $" STR(CG_GDT_SET) ", $0\n\t"   // far call via call gate selector
+        "lcall $"STR(CG_GDT_SET)", $0\n\t" // far call via call gate selector
         :
         : "a"((u32)param),     // eax
           "b"(handler),        // ebx
@@ -74,10 +75,11 @@ static inline void syscall_call_gate_set(u16 selector, void (*handler)(void), u8
  * This function calls call_gate.
  */
 __attribute__((always_inline))
-static inline void syscall_tss_desc_set(u16 selector, struct tss32 *tss)
+static inline void
+syscall_tss_desc_set(u16 selector, struct tss32 *tss)
 {
     __asm__ __volatile__ (
-        "lcall $" STR(CG_GDT_SET) ", $0\n\t"   // far call via call gate selector
+        "lcall $"STR(CG_GDT_SET)", $0\n\t" // far call via call gate selector
         :
         : "a"((u32)tss),       // eax
           "b"((u32)selector),  // ebx
@@ -91,10 +93,11 @@ static inline void syscall_tss_desc_set(u16 selector, struct tss32 *tss)
  * This function calls call_gate.
  */
 __attribute__((always_inline))
-static inline void syscall_ldt_desc_set(u16 selector, u32 base, u32 limit)
+static inline void
+syscall_ldt_desc_set(u16 selector, u32 base, u32 limit)
 {
     __asm__ __volatile__ (
-        "lcall $" STR(CG_GDT_SET) ", $0\n\t"   // far call via call gate selector
+        "lcall $"STR(CG_GDT_SET)", $0\n\t" // far call via call gate selector
         :
         : "a"((u32)limit),     // eax
           "b"((u32)base),      // ebx
@@ -109,7 +112,8 @@ static inline void syscall_ldt_desc_set(u16 selector, u32 base, u32 limit)
  * This function calls call_gate from lower privileged rings.
  */
 __attribute__((always_inline))
-static inline void syscall_gdt_desc_set(u16 selector, u64 descriptor) {
+static inline void
+syscall_gdt_desc_set(u16 selector, u64 descriptor) {
     // Split 64-bit descriptor into two 32-bit parts
     u32 low  = (u32)(descriptor & 0xFFFFFFFFULL);      // lower 32 bits
     u32 high = (u32)((descriptor >> 32) & 0xFFFFFFFF); // upper 32 bits
@@ -120,7 +124,7 @@ static inline void syscall_gdt_desc_set(u16 selector, u64 descriptor) {
     register u32 edx_val __asm__("edx") = (u32)DESC64;
 
     __asm__ __volatile__ (
-        "lcall $" STR(CG_GDT_SET) ", $0\n\t"   // far call via call gate
+        "lcall $"STR(CG_GDT_SET)", $0\n\t" // far call via call gate
         :
         : "a"(low),           // EAX = lower 32 bits of descriptor
           "b"(high),          // EBX = upper 32 bits of descriptor

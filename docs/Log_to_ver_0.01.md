@@ -53,3 +53,21 @@ Ring 3 can invoke the Ring 1 interrupt handler but **cannot escalate privileges*
 
  ✅ Summary
 This architecture ensures that **Ring 3 tasks cannot directly interact with hardware**, maintaining system stability and security by enforcing privilege levels and controlled access to hardware through trusted Ring 1 interrupt handlers.
+
+---
+
+# Keyboard Interrupt Flow, Devs IRQ Mechanism, and Userspace Event Loop
+
+In this version, we demonstrate a minimal keyboard interrupt flow that shows how the system handles input step-by-step.
+
+When a keyboard interrupt occurs, the `register_irq()` function is called, which switches to a nested task in ring 1. This nested task temporarily disables interrupts and processes the event in a very lightweight manner. The stack used by this nested task is small, and the result of the interrupt (like the ASCII code of the key pressed) is stored on that stack. This keeps stack usage predictable and reduces the risk of overflow.
+
+The `devs_irq_task` event loop then calls `get_keyboard_int()`, which handles the key press and stores the result back on the stack. After this, the system returns to the original task (in ring 3) via an `iret`, where the result is read from the stack.
+
+In the userspace event loop, we continuously check if a new character is available. If there is, we print it immediately using `print_char()`. Right now, the keyboard functionality is minimal, with only basic keys working (no shift yet), but this demonstrates how the system can process input in real-time, without waiting for a full scheduler cycle.
+
+This approach makes it clear how tasks can handle specific events, keeps the stacks isolated, and reduces complexity. Each task does a small job, and the system remains responsive and simple.
+
+_For more detailed explanations, we recommend checking the code in [this commit](https://github.com/isoux/R4R/commit/47c3addedd383e8acc33ac5b51d3d9900a326f6d), which contains extensive comments._
+
+

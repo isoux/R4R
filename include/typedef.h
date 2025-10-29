@@ -52,7 +52,7 @@ typedef u32 u_int;
 #endif
 
 
-typedef void (*void_func)(void);        // Function with no args, no return
+//typedef void (*void_func)(void);        // Function with no args, no return
 typedef void (*void_f_int)(u_int);      // Function taking u_int, no return
 typedef u_int (*int_f_int)(u_int);      // Function taking and returning u_int
 
