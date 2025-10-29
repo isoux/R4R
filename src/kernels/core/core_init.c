@@ -18,6 +18,7 @@ extern void setup_sys_interrupts(void);
 extern void setup_core_call_gates(void);
 extern void setup_core_main_task(void);
 extern void clear_user_memory(void);
+extern void keyboard_enable(void);
 extern void enter_users_main_task(void);
 
 void resume_sys_setup(void);
@@ -64,7 +65,7 @@ void setup_core(void){
 void resume_sys_setup(void) {
 
     clear_user_memory();
-
+    keyboard_enable();
     // From this point onward, the context switch jumps permanently into the
     // user-space main task (Ring 3).
     enter_users_main_task();

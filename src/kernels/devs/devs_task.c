@@ -90,7 +90,7 @@ void setup_tss_devs_irq_struct(void){
     tss_devs_irq.es = DEVS_LDT_DATA; tss_devs_irq._res_es = 0;
     tss_devs_irq.fs = DEVS_LDT_DATA; tss_devs_irq._res_fs = 0;
     tss_devs_irq.gs = DEVS_ACCES_DATA; tss_devs_irq._res_gs = 0;
-    tss_devs_irq.eflags = 0x00001000; // IF=0 IOPL=1
+    tss_devs_irq.eflags = 0x00001200; // IF=0 IOPL=1
     tss_devs_irq.ldt = LDT_DEVS; tss_devs_irq._res_ldt = 0;
 }
 

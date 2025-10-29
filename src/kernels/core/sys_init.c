@@ -11,6 +11,8 @@
  * (C) Copyright 2025 Isa <isa@isoux.org>
  */
 #include <sys.h>
+#include <typedef.h>
+#include <hw/io.h>
 
 #define SYS_CLEAN_BASE 0x100000
 #define SYS_CLEAN_SIZE ((USERS_START - SYS_CLEAN_BASE) / 4)
@@ -47,4 +49,23 @@ void enter_users_main_task(void) {
     // From this point onward, the context switch jumps permanently into the
     // user-space main task (Ring 3).
     __asm__ volatile ("ljmp *%0" : : "m"(far_jmp_args));
+}
+
+void keyboard_enable(void) {
+    // Unmask IRQ1 (keyboard interrupt) on master PIC
+    u8 mask = inb(0x21);     // read current PIC mask
+    mask &= 0xFD;            // clear bit 1 (IRQ1 enabled)
+    outb(0x21, mask);
+}
+
+void keyboard_ack(void) {
+    // Acknowledge keyboard controller (port 0x61)
+    u8 a = inb(0x61);        // read current state
+    outb(0x61, a | 0x80);    // set bit 7 (ack pulse)
+    outb(0x61, a);           // restore original value
+}
+
+void keyboard_init(void) {
+    keyboard_enable();
+    keyboard_ack();
 }

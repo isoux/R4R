@@ -61,8 +61,8 @@ link-devs:
 	@echo "--- Linking devs.elf ---"
 	ld -T src/kernels/devs/devs.ld -nostdlib  -m elf_i386 \
 	    build/devs/devs_init.o build/devs/devs_call_gates.o build/devs/devs_task.o \
-	    build/devs/devs_irq.o build/devs/devs_sched.o \
-	    -o build/devs/devs.elf
+	    build/devs/devs_irq.o build/devs/devs_sched.o build/devs/keyboard.o \
+	    build/devs/devs_idt.o -o build/devs/devs.elf
 	objdump -d -D -M intel build/devs/devs.elf >> build/dumps/devs.dump
 	
 link-libs:
