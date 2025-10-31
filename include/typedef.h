@@ -44,8 +44,10 @@ typedef u32                uptr;
 
 // NULL definition if not already defined
 #ifndef NULL
-#define NULL ((void*)0)
+#define NULL ((void *)0)
 #endif
+
+#define offsetof(type, member) ((u32) &(((type *)0)->member))
 
 #ifndef u_int
 typedef u32 u_int;

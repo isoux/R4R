@@ -9,7 +9,6 @@
  */
 
 #include <typedef.h>
-#include <stddef.h>
 
 #include "devs_irq.h"
 
