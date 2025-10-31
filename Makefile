@@ -105,3 +105,13 @@ sys:
 bochs:
 	bochs -q -f build/sys_out/bochs_from_make.txt
 	
+
+# ----------------------------------------------------------
+#  Optional test target (manual run only)
+# ----------------------------------------------------------
+
+test:
+	@echo "=== Running user-space tests ==="
+	@$(MAKE) -C tests/sys
+	@$(MAKE) -C tests/sys run
+	
