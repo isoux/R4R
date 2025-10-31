@@ -70,4 +70,12 @@ This approach makes it clear how tasks can handle specific events, keeps the sta
 
 _For more detailed explanations, we recommend checking the code in [this commit](https://github.com/isoux/R4R/commit/47c3addedd383e8acc33ac5b51d3d9900a326f6d), which contains extensive comments._
 
+---
+
+# Gradual Introduction of Testing
+
+Initial testing has begun, focusing primarily on compiling files directly on the same machine used for building the kernel. These tests are not about verifying how the R4R system runs, but rather about checking various macros and memory values of variables. This marks the [first step](https://github.com/isoux/R4R/commit/209547f0b297e483ebdec81bfeb111238d52fe53) in ensuring that system definitions are correct and consistent.
+
+---
+
 
